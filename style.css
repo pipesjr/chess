@@ -1,0 +1,130 @@
+:root {
+  --bg: #f4f1ea;
+  --card: #ffffff;
+  --text: #2b2a27;
+  --muted: #6d6a63;
+  --accent: #3b6e4f;
+  --danger: #a33a2c;
+  --light-sq: #eeeed2;
+  --dark-sq: #769656;
+  --border: #ddd8cc;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.5;
+}
+
+header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 16px 24px;
+  background: var(--accent);
+  color: #fff;
+}
+
+header h1 { margin: 0; font-size: 1.4rem; }
+
+nav { display: flex; gap: 8px; }
+
+button {
+  font: inherit;
+  padding: 8px 14px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: #fff;
+  color: var(--text);
+  cursor: pointer;
+}
+
+button:hover { filter: brightness(0.95); }
+button.primary { background: var(--accent); border-color: var(--accent); color: #fff; }
+button.danger { background: #fff; border-color: var(--danger); color: var(--danger); }
+.tab { background: transparent; border-color: rgba(255, 255, 255, 0.5); color: #fff; }
+.tab.active { background: #fff; color: var(--accent); }
+
+main { max-width: 820px; margin: 0 auto; padding: 16px; }
+
+.view { display: none; }
+.view.active { display: block; }
+.hidden { display: none !important; }
+
+.toolbar { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 16px; }
+.toolbar select { flex: 1 1 200px; font: inherit; padding: 8px; border-radius: 6px; border: 1px solid var(--border); }
+
+.card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 20px;
+  margin-bottom: 16px;
+}
+
+.card h2 { margin-top: 0; font-size: 1.15rem; }
+
+.goal { font-size: 1.3rem; font-weight: 700; margin: 0; }
+.to-move { color: var(--muted); margin: 0 0 12px; }
+.prompt { color: var(--muted); font-style: italic; }
+
+.position { margin: 0; font-size: 1.15rem; }
+.position dt { font-weight: 700; margin-top: 8px; }
+.position dd { margin: 2px 0 0 0; font-family: ui-monospace, Menlo, Consolas, monospace; }
+
+.actions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+
+.answer-layout { display: flex; flex-wrap: wrap; gap: 24px; align-items: flex-start; }
+.answer-layout > div:last-child { flex: 1 1 220px; }
+.solution { font-size: 1.3rem; font-weight: 700; font-family: ui-monospace, Menlo, Consolas, monospace; }
+
+.board {
+  display: grid;
+  grid-template-columns: 16px repeat(8, 1fr);
+  width: min(100%, 360px);
+  font-size: clamp(22px, 7vw, 36px);
+  user-select: none;
+}
+
+.board .sq {
+  aspect-ratio: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+  /* Symbol fonts first so the king isn't drawn by an emoji font. */
+  font-family: "Segoe UI Symbol", "Apple Symbols", "DejaVu Sans", "Noto Sans Symbols 2", "FreeSerif", serif;
+}
+
+.board .light { background: var(--light-sq); }
+.board .dark { background: var(--dark-sq); }
+.board .label { font-size: 11px; color: var(--muted); display: flex; align-items: center; justify-content: center; }
+.board .sq { color: #111; }
+
+form { display: grid; gap: 12px; }
+label { display: grid; gap: 4px; font-weight: 600; }
+input, textarea, form select {
+  font: inherit;
+  font-weight: 400;
+  padding: 8px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+}
+textarea { font-family: ui-monospace, Menlo, Consolas, monospace; }
+
+.help { color: var(--muted); }
+.error { color: var(--danger); margin: 0; min-height: 1.5em; }
+code { background: #f0ede6; padding: 1px 4px; border-radius: 4px; }
+pre {
+  background: #f0ede6;
+  padding: 12px;
+  border-radius: 6px;
+  overflow-x: auto;
+  font-size: 0.85rem;
+}

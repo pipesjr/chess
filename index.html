@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Chess Vision Trainer</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <h1>Chess Vision Trainer</h1>
+    <nav>
+      <button class="tab active" data-view="practice">Practice</button>
+      <button class="tab" data-view="add">Add tactic</button>
+    </nav>
+  </header>
+
+  <main>
+    <section id="practice" class="view active">
+      <div class="toolbar">
+        <select id="tactic-select" aria-label="Choose a tactic"></select>
+        <button id="prev">&larr; Prev</button>
+        <button id="random">Random</button>
+        <button id="next">Next &rarr;</button>
+      </div>
+
+      <article class="card">
+        <p class="goal" id="goal"></p>
+        <p class="to-move" id="to-move"></p>
+        <dl class="position" id="description"></dl>
+        <p class="prompt">Picture the board, find the move, then check yourself.</p>
+        <div class="actions">
+          <button id="peek" class="secondary">Peek at board</button>
+          <button id="reveal" class="primary">Show answer</button>
+        </div>
+      </article>
+
+      <article class="card answer hidden" id="answer">
+        <div class="answer-layout">
+          <div class="board" id="board"></div>
+          <div>
+            <h2>Solution</h2>
+            <p class="solution" id="solution"></p>
+            <p id="explanation"></p>
+            <button id="delete" class="danger hidden">Delete this tactic</button>
+          </div>
+        </div>
+      </article>
+    </section>
+
+    <section id="add" class="view">
+      <article class="card">
+        <h2>Add a tactic</h2>
+        <p class="help">
+          Enter the position either as a FEN string or as a piece list like
+          <code>White: Kg1 Ra1 f2 g2 h2; Black: Kg8 f7 g7 h7</code>.
+          Pieces use K Q R B N, and a bare square is a pawn.
+        </p>
+        <form id="add-form">
+          <label>Title <input name="title" required placeholder="Back rank mate"></label>
+          <label>Goal <input name="goal" required placeholder="Mate in 1"></label>
+          <label>Position <textarea name="position" rows="2" required></textarea></label>
+          <label>Side to move
+            <select name="turn">
+              <option value="w">White</option>
+              <option value="b">Black</option>
+            </select>
+          </label>
+          <label>Solution (moves separated by spaces) <input name="solution" required placeholder="Qxe8+ Qxe8 Rxe8#"></label>
+          <label>Explanation (optional) <textarea name="explanation" rows="2"></textarea></label>
+          <p class="error" id="add-error"></p>
+          <div class="actions">
+            <button type="button" id="preview-btn" class="secondary">Preview</button>
+            <button type="submit" class="primary">Save tactic</button>
+          </div>
+        </form>
+      </article>
+
+      <article class="card hidden" id="preview">
+        <h2>Preview</h2>
+        <dl class="position" id="preview-description"></dl>
+        <div class="board" id="preview-board"></div>
+      </article>
+
+      <article class="card">
+        <h2>Your saved tactics</h2>
+        <p class="help">
+          Tactics you add are saved in this browser. To make them part of the
+          site for everyone, copy them as code and paste them into <code>tactics.js</code>.
+        </p>
+        <div class="actions">
+          <button id="copy-code" class="secondary">Copy as code</button>
+        </div>
+        <pre id="code-output" class="hidden"></pre>
+      </article>
+    </section>
+  </main>
+
+  <script src="tactics.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
